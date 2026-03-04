@@ -1,146 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel H5P') }}</title>
 
-        <script>
-            window.Laravel = <?php echo json_encode([ 'csrfToken' => csrf_token()]); ?>
-        </script>
+    {{-- Minimal Modern CSS --}}
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e5e7eb;
+            --text: #1f2937;
+        }
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url('css/app.css') }}"/>
+        * {
+            box-sizing: border-box;
+        }
 
-        @stack('h5p-header-script')
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: var(--text);
+        }
 
-        <!-- Styles -->
-        <style>
-            .full-height {
-                height: 100vh;
-            }
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .navbar a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            margin-left: 20px;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .navbar a:hover {
+            color: var(--primary);
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .brand {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--primary);
+        }
 
-            .content {
-                text-align: center;
-            }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    @stack('h5p-header-script')
+</head>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+<body>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-
-    <body>
-
-        <div  id="app" 
-              @if (Route::has('welcome'))
-              class="flex-center position-ref full-height"
-              @endif
-              >
-
-
-              <nav class="navbar navbar-default navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-
-                        <!-- Collapsed Hamburger -->
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-                        <!-- Branding Image -->
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            {{ config('app.name', 'LARAVEL-H5P') }}
-                        </a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="nav navbar-nav">
-                            &nbsp;
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-
-                            <li><a href="/h5p" class="">H5P</a></li>
-                            <li><a href="/library" class="">H5P Library</a></li>
-
-                            <!-- Authentication Links -->
-                            @if (Auth::guest())
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/register">Register</a></li>
-                            @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="/logout"
-                                           onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            @yield('h5p')
-
+    <div class="navbar">
+        <div class="brand">
+            {{ config('app.name', 'Laravel H5P') }}
         </div>
 
-        <script type="text/javascript" src="{{ url('js/app.js') }}"></script>        
-        @stack('h5p-footer-script')
+        <div>
+            <a href="{{ url('/h5p') }}">H5P</a>
+            <a href="{{ url('/h5p/library') }}">Library</a>
 
-    </body>
+            @auth
+                <span style="margin-left:20px;">{{ auth()->user()->name }}</span>
+            @endauth
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="h5p-wrapper">
+                @yield('h5p')
+            </div>
+        </div>
+    </div>
+
+    @stack('h5p-footer-script')
+    <script>
+        window.Laravel = {
+            csrfToken: '{{ csrf_token() }}'
+        };
+    </script>
+</body>
+
 </html>
